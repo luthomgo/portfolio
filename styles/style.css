@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: 'Raleway', sans-serif;
+  color: white;
+  background: #121212;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #121212;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0f3460;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3a86ff;
+}
