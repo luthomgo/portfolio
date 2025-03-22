@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lutho Mgolombane | AI & Design Portfolio</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/heroPage.css">
+    <link rel="stylesheet" href="styles/about.css">
+    <link rel="stylesheet" href="styles/project.css">
+    <link rel="stylesheet" href="styles/section.css">
+    <link rel="stylesheet" href="styles/skills.css">
+
+    <!-- Google Fonts - Can be downloaded locally if preferred -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Lutho Mgolombane</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <div class="hero-container">
+        <canvas id="network-canvas"></canvas>
+        <div class="hero-content">
+            <h1>Lutho Mgolombane</h1>
+            <h2>AI Designer & Developer</h2>
+            <p>Creating innovative solutions at the intersection of design and artificial intelligence.</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn primary-btn">View My Work</a>
+                <a href="#contact" class="btn secondary-btn">Get In Touch</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <p>Scroll to explore</p>
+            <div class="arrow-down"></div>
+        </div>
+    </div>
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Hello, I'm Lutho</h2>
+                <div class="section-underline"></div>
+            </div>
+            <div class="about-content">
+                <!-- <div class="about-image">
+                    <div class="image-container">
+                        <img src="images/image.jpeg" alt="Lutho Mgolombane">
+                        <div class="image-overlay"></div>
+                    </div>
+                </div> -->
+                <div class="about-text">
+                    <!-- <h3>Hello, I'm Lutho</h3> -->
+                    <p>I'm an AI Designer and Developer passionate about creating meaningful and innovative solutions that bridge the gap between human-centered design and artificial intelligence.</p>
+                    <p>With expertise in UX/UI design, machine learning, and front-end development, I craft digital experiences that are not only visually appealing but also intelligent and intuitive.</p>
+                    <p>My journey began in design, but I quickly became fascinated with the potential of AI to transform how we interact with technology. This led me to explore the intersection of these fields, where I've been able to create projects that use AI to enhance human capabilities rather than replace them.</p>
+                    <!-- <div class="personal-info">
+                        <div class="info-item">
+                            <span class="info-label">Name:</span>
+                            <span class="info-value">Lutho Mgolombane</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Email:</span>
+                            <span class="info-value">contact@luthomgolombane.com</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Location:</span>
+                            <span class="info-value">Cape Town, South Africa</span>
+                        </div> -->
+                    </div>
+                    <a href="#contact">
+                        <button class="contact-btn">Let's Connect</button>
+                    </a>
+                </div>
+            </div>
+        <!-- </div> -->
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section dark-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">My Projects</h2>
+                <div class="section-underline"></div>
+            </div>
+            <div class="projects-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="ai">AI</button>
+                <button class="filter-btn" data-filter="design">Design</button>
+                <button class="filter-btn" data-filter="development">Development</button>
+            </div>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card" data-category="ai development">
+                    <div class="project-image">
+                        <img src="/api/placeholder/600/400" alt="AI Recommendation System">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link"><i class="fas fa-link"></i></a>
+                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">AI Recommendation System</h3>
+                        <p class="project-description">A personalized content recommendation engine using machine learning algorithms to enhance user experience.</p>
+                        <div class="project-tags">
+                            <span class="tag">TensorFlow</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">React</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card" data-category="design">
+                    <div class="project-image">
+                        <img src="/api/placeholder/600/400" alt="UX/UI Design System">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link"><i class="fas fa-link"></i></a>
+                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">UX/UI Design System</h3>
+                        <p class="project-description">A comprehensive design system created for scalability and consistency across digital products.</p>
+                        <div class="project-tags">
+                            <span class="tag">Figma</span>
+                            <span class="tag">Design Systems</span>
+                            <span class="tag">Accessibility</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card" data-category="ai design">
+                    <div class="project-image">
+                        <img src="/api/placeholder/600/400" alt="AI-Powered Design Assistant">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link"><i class="fas fa-link"></i></a>
+                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">AI-Powered Design Assistant</h3>
+                        <p class="project-description">An intelligent assistant that helps designers automate repetitive tasks and generate creative variations.</p>
+                        <div class="project-tags">
+                            <span class="tag">Machine Learning</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Adobe API</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project-card" data-category="development">
+                    <div class="project-image">
+                        <img src="/api/placeholder/600/400" alt="Interactive Data Visualization">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link"><i class="fas fa-link"></i></a>
+                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Interactive Data Visualization</h3>
+                        <p class="project-description">A dynamic dashboard that transforms complex datasets into intuitive visual representations.</p>
+                        <div class="project-tags">
+                            <span class="tag">D3.js</span>
+                            <span class="tag">SVG</span>
+                            <span class="tag">Data Analysis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="projects-cta">
+                <a href="#" class="btn secondary-btn">View More Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Skills & Expertise</h2>
+                <div class="section-underline"></div>
+            </div>
+            <div class="skills-container">
+                <div class="skills-category">
+                    <div class="category-header">
+                        <i class="fas fa-brain"></i>
+                        <h3>AI & Machine Learning</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Machine Learning</span>
+                                <span class="skill-percentage">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Natural Language Processing</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Computer Vision</span>
+                                <span class="skill-percentage">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Reinforcement Learning</span>
+                                <span class="skill-percentage">75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skills-category">
+                    <div class="category-header">
+                        <i class="fas fa-paint-brush"></i>
+                        <h3>Design</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">UI/UX Design</span>
+                                <span class="skill-percentage">95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Interaction Design</span>
+                                <span class="skill-percentage">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Visual Design</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Prototyping</span>
+                                <span class="skill-percentage">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skills-category">
+                    <div class="category-header">
+                        <i class="fas fa-code"></i>
+                        <h3>Development</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">JavaScript</span>
+                                <span class="skill-percentage">95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">React</span>
+                                <span class="skill-percentage">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Python</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">TensorFlow/PyTorch</span>
+                                <span class="skill-percentage">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tools Section -->
+            <div class="tools-section">
+                <h3 class="tools-title">Tools & Technologies</h3>
+                <div class="tools-grid">
+                    <div class="tool-item">
+                        <i class="fab fa-figma"></i>
+                        <span>Figma</span>
+                    </div>
+                    <div class="tool-item">
+                        <i class="fab fa-adobe"></i>
+                        <span>Adobe Suite</span>
+                    </div>
+                    <div class="tool-item">
+                        <i class="fab fa-react"></i>
+                        <span>React</span>
+                    </div>
+                    <div class="tool-item">
+                        <i class="fab fa-node-js"></i>
+                        <span>Node.js</span>
+                    </div>
+                    <div class="tool-item">
+                        <i class="fab fa-python"></i>
+                        <span>Python</span>
+                    </div>
+                    <div class="tool-item">
+                        <i class="fas fa-database"></i>
+                        <span>MongoDB</span>
+                    </div>
+                    <div class="tool-item">
+                        <i class="fab fa-git-alt"></i>
+                        <span>Git</span>
+                    </div>
+                    <div class="tool-item">
+                        <i class="fas fa-brain"></i>
+                        <span>TensorFlow</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section dark-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="section-underline"></div>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Let's Work Together</h3>
+                    <p>I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Location</h4>
+                                <p>Cape Town, South Africa</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>contact@luthomgolombane.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+27 (0) 123 456 789</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-dribbble"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="subject" name="subject" placeholder="Subject">
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn primary-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">Lutho Mgolombane</div>
+            <p class="footer-tagline">AI Designer & Developer</p>
+            <div class="footer-social">
+                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-dribbble"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Lutho Mgolombane. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="script/main.js"></script>
+</body>
+</html>
