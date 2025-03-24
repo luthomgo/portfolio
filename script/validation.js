@@ -1,4 +1,5 @@
 // Form validation and animation scripts
+
 document.addEventListener("DOMContentLoaded", function () {
   // DOM elements
   const contactForm = document.getElementById("contactForm");
