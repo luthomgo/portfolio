@@ -1,31 +1,3 @@
-/* .projects-filter {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 40px;
-    gap: 15px;
-} */
-
-/* .filter-btn {
-    background: rgba(255, 255, 255, 0.05);
-    border: none;
-    color: white;
-    padding: 8px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 500;
-} */
-
-/* .filter-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-} */
-
-/* .filter-btn.active {
-    background: #2563eb;
-    color: white;
-} */
-
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -91,22 +63,15 @@
 }
 
 .project-link {
-    /* width: 45px;
-    height: 45px; */
-    /* background: rgba(255, 255, 255, 0.1); */
+
     color: #2563eb;
-    /* border-radius: 50%; */
     display: flex;
-    /* justify-content: flex-end; */
     margin-bottom: 5px;
     font-size: .9rem;
-    /* align-items: center;
-    justify-content: center; */
     transition: all 0.3s ease;
 }
 
 .project-link:hover {
-    /* background: #2563eb; */
     transform: translateY(-3px);
 }
 

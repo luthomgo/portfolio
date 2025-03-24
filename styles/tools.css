@@ -5,7 +5,6 @@
 .tools-title {
     text-align: center;
     font-size: 1.8rem;
-    /* margin-bottom: 40px; */
     color: white;
     position: relative;
     display: block;
@@ -20,7 +19,6 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    /* background-color: #3a86ff; */
 }
 
 .tools-grid {
