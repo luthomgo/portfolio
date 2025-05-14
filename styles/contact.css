@@ -125,7 +125,7 @@
 }
 
 .form-group label {
-  position: absolute;
+  /* position: absolute; */
   top: 0;
   left: 20px;
   transform: translateY(-50%);
@@ -231,4 +231,15 @@
   max-width: 100%;
   margin-block: 1.5rem;
   text-align: center;
+}
+
+/* LinkedIn SVG color change on hover */
+.social-link[href*="linkedin"]:hover svg g {
+  fill: #2563eb;
+  transition: fill 0.3s ease;
+}
+
+.social-link[href*="github"]:hover svg g {
+  fill:#2563eb;
+  transition: fill 0.3s ease;
 }
