@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("contactForm");
   const feedback = document.getElementById("form-feedback");
 
-  // ✅ Detect if redirected after submission
+  // Detect if redirected after submission
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get("form") === "success") {
     if (form) form.reset();
@@ -11,10 +11,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Clean the URL so "?form=success" goes away
-    window.history.replaceState({}, document.title, window.location.pathname);
+    window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
   }
 
-  // ✅ On form submit (for validation)
+  // On form submit (for validation)
   form.addEventListener("submit", function (e) {
     const formGroups = document.querySelectorAll(".form-group");
 
