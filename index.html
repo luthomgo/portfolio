@@ -433,22 +433,27 @@
           </div>
 
           <div class="contact-form">
-            <form id="contactForm">
+            <form id="contactForm" action="https://formspree.io/f/mnndwwrb" method="POST">
               <div class="form-group">
-                <input type="text" id="name" name="name" placeholder="Your Name"
-                  required />
+                <label for="name">Your Name:
+                <input type="text" id="name" name="name" required />
+                </label>
               </div>
               <div class="form-group">
-                <input type="email" id="email" name="email"
-                  placeholder="Your Email" required />
+                <label for="email">Your Email:
+                <input type="email" id="email" name="email" required />
+                </label>
               </div>
               <div class="form-group">
-                <input type="text" id="subject" name="subject"
-                  placeholder="Subject" />
+                <label for="subject">Subject:
+                <input type="text" id="subject" name="subject"/>
+                </label>
               </div>
               <div class="form-group">
+                <label for="message">Message:
                 <textarea id="message" name="message" placeholder="Your Message"
                   required></textarea>
+                </label>
               </div>
               <button type="submit" class="btn primary-btn">
                 Send Message
@@ -468,6 +473,7 @@
       </footer>
       <script src="script/main.js"></script>
       <script src="script/validation.js"></script>
+      <script src="script/skills.js"></script>
     </body>
 
   </html>
