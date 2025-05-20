@@ -130,18 +130,18 @@
   resize: vertical;
 }
 
-.form-group label {
+/* .form-group label { */
   /* position: absolute; */
-  top: 0;
+  /* top: 0;
   left: 20px;
   transform: translateY(-50%);
   background: #0d0d17;
   padding: 0 10px;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.9rem;
-  pointer-events: none;
-  transition: all 0.3s ease;
-}
+  color: rgba(255, 255, 255, 0.7); */
+  /* font-size: 0.9rem; */
+  /* pointer-events: none; */
+  /* transition: all 0.3s ease;
+} */
 
 .primary-btn {
   width: 100%;
