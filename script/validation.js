@@ -1,4 +1,4 @@
-// Form validation and animation scripts
+// Form validation 
 
 document.addEventListener("DOMContentLoaded", function () {
   // DOM elements
@@ -50,10 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
     errorMessage.innerText = message;
   }
 
-  function showSuccess(input) {
-    const formGroup = input.parentElement;
-    formGroup.className = "form-group success";
-  }
+
 
   function showFeedback(type, message) {
     feedbackElement.className = `form-feedback ${type}`;
@@ -67,106 +64,60 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Form submission handler
-  contactForm.addEventListener("submit", function (e) {
+  contactForm.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    // Reset states
+    // Reset error states
     formGroups.forEach((group) => {
-      group.className = "form-group";
+      group.classList.remove("error");
     });
     feedbackElement.style.display = "none";
 
-    // Validate name
+    // Run validations
+    let hasErrors = false;
+
     if (nameInput.value.trim() === "") {
       showError(nameInput, "Name is required");
-    } else {
-      showSuccess(nameInput);
+      hasErrors = true;
     }
 
-    // Validate email
     if (emailInput.value.trim() === "") {
       showError(emailInput, "Email is required");
+      hasErrors = true;
     } else if (!validateEmail(emailInput.value.trim())) {
       showError(emailInput, "Email is not valid");
-    } else {
-      showSuccess(emailInput);
+      hasErrors = true;
     }
 
-    // Validate message
     if (messageInput.value.trim() === "") {
       showError(messageInput, "Message is required");
+      hasErrors = true;
     } else if (messageInput.value.trim().length < 10) {
       showError(messageInput, "Message must be at least 10 characters");
-    } else {
-      showSuccess(messageInput);
+      hasErrors = true;
     }
 
-    // Check if form is valid
-    const hasErrors = document.querySelectorAll(".form-group.error").length > 0;
+    // If errors exist, don't submit
+    if (hasErrors) return;
 
-    if (!hasErrors) {
-      // Simulate form submission (replace with actual form submission)
-      const submitBtn = contactForm.querySelector('button[type="submit"]');
-      const originalText = submitBtn.innerText;
+    // Otherwise, submit via Formspree
+  //   try {
+  //     const formData = new FormData(contactForm);
 
-      submitBtn.disabled = true;
-      submitBtn.innerText = "Sending...";
+  //     const response = await fetch(contactForm.action, {
+  //       method: contactForm.method,
+  //       headers: { Accept: "application/json" },
+  //       body: formData,
+  //     });
 
-      // Simulate network request
-      setTimeout(() => {
-        // Show success message
-        showFeedback(
-          "success",
-          "Your message has been sent successfully! I will contact you soon."
-        );
-
-        // Reset form
-        contactForm.reset();
-        formGroups.forEach((group) => {
-          group.className = "form-group";
-        });
-
-        // Reset button
-        submitBtn.disabled = false;
-        submitBtn.innerText = originalText;
-      }, 1500);
-    }
+      // if (response.ok) {
+      //   showFeedback("success", "Message sent successfully!");
+      //   contactForm.reset();
+      // } else {
+      //   showFeedback("error", "Oops! Something went wrong. Please try again.");
+      // }
+  //   } catch (error) {
+  //     showFeedback("error", "Network error. Please try again later.");
+  //   }
   });
-
-  // Animate skill bars on scroll
-  const animateSkillBars = () => {
-    const skillItems = document.querySelectorAll(".skill-item");
-
-    skillItems.forEach((item) => {
-      const skillBar = item.querySelector(".skill-progress");
-      const percentage = item.querySelector(".skill-percentage").innerText;
-
-      // Reset initial width
-      skillBar.style.width = "0";
-
-      // Set up observer
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              // Animate to target width when visible
-              setTimeout(() => {
-                skillBar.style.width = percentage;
-              }, 200);
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.5 }
-      );
-
-      observer.observe(item);
-    });
-  };
-
-  // Run skill bar animation
-  animateSkillBars();
-
-  // Re-run on window resize
-  window.addEventListener("resize", animateSkillBars);
 });
