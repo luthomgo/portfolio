@@ -1,123 +1,81 @@
-// Form validation 
-
 document.addEventListener("DOMContentLoaded", function () {
-  // DOM elements
-  const contactForm = document.getElementById("contactForm");
-  const nameInput = document.getElementById("name");
-  const emailInput = document.getElementById("email");
-  const subjectInput = document.getElementById("subject");
-  const messageInput = document.getElementById("message");
+  const form = document.getElementById("contactForm");
+  const feedback = document.getElementById("form-feedback");
 
-  // Add labels to form inputs
-  const formGroups = document.querySelectorAll(".form-group");
-  formGroups.forEach((group) => {
-    const input = group.querySelector("input, textarea");
-    if (input) {
-      // Create label
-      const label = document.createElement("label");
-      label.setAttribute("for", input.id);
-      label.textContent = input.placeholder;
-
-      // Create error message element
-      const errorMsg = document.createElement("div");
-      errorMsg.className = "error-message";
-
-      // Add to DOM
-      group.insertBefore(label, input);
-      group.appendChild(errorMsg);
-
-      // Update input styling
-      input.placeholder = "";
+  // ✅ Detect if redirected after submission
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get("form") === "success") {
+    if (form) form.reset();
+    if (feedback) {
+      showFeedback("Thanks for reaching out! Your message has been sent.", "success");
     }
-  });
 
-  // Create feedback element
-  const feedbackElement = document.createElement("div");
-  feedbackElement.className = "form-feedback";
-  contactForm.insertBefore(feedbackElement, contactForm.firstChild);
-
-  // Form validation functions
-  function validateEmail(email) {
-    const re =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
+    // Clean the URL so "?form=success" goes away
+    window.history.replaceState({}, document.title, window.location.pathname);
   }
 
-  function showError(input, message) {
-    const formGroup = input.parentElement;
-    formGroup.className = "form-group error";
-    const errorMessage = formGroup.querySelector(".error-message");
-    errorMessage.innerText = message;
-  }
+  // ✅ On form submit (for validation)
+  form.addEventListener("submit", function (e) {
+    const formGroups = document.querySelectorAll(".form-group");
 
-
-
-  function showFeedback(type, message) {
-    feedbackElement.className = `form-feedback ${type}`;
-    feedbackElement.innerText = message;
-    feedbackElement.style.display = "block";
-
-    // Auto-hide feedback after 5 seconds
-    setTimeout(() => {
-      feedbackElement.style.display = "none";
-    }, 5000);
-  }
-
-  // Form submission handler
-  contactForm.addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    // Reset error states
+    // Clear previous errors
     formGroups.forEach((group) => {
       group.classList.remove("error");
+      const error = group.querySelector(".error-message");
+      if (error) error.textContent = "";
     });
-    feedbackElement.style.display = "none";
+    feedback.style.display = "none";
 
-    // Run validations
     let hasErrors = false;
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
 
-    if (nameInput.value.trim() === "") {
-      showError(nameInput, "Name is required");
+    if (name === "") {
+      setError("name", "Name is required");
       hasErrors = true;
     }
 
-    if (emailInput.value.trim() === "") {
-      showError(emailInput, "Email is required");
+    if (email === "") {
+      setError("email", "Email is required");
       hasErrors = true;
-    } else if (!validateEmail(emailInput.value.trim())) {
-      showError(emailInput, "Email is not valid");
-      hasErrors = true;
-    }
-
-    if (messageInput.value.trim() === "") {
-      showError(messageInput, "Message is required");
-      hasErrors = true;
-    } else if (messageInput.value.trim().length < 10) {
-      showError(messageInput, "Message must be at least 10 characters");
+    } else if (!validateEmail(email)) {
+      setError("email", "Enter a valid email address");
       hasErrors = true;
     }
 
-    // If errors exist, don't submit
-    if (hasErrors) return;
+    if (message === "") {
+      setError("message", "Message is required");
+      hasErrors = true;
+    } else if (message.length < 10) {
+      setError("message", "Message must be at least 10 characters");
+      hasErrors = true;
+    }
 
-    // Otherwise, submit via Formspree
-  //   try {
-  //     const formData = new FormData(contactForm);
-
-  //     const response = await fetch(contactForm.action, {
-  //       method: contactForm.method,
-  //       headers: { Accept: "application/json" },
-  //       body: formData,
-  //     });
-
-      // if (response.ok) {
-      //   showFeedback("success", "Message sent successfully!");
-      //   contactForm.reset();
-      // } else {
-      //   showFeedback("error", "Oops! Something went wrong. Please try again.");
-      // }
-  //   } catch (error) {
-  //     showFeedback("error", "Network error. Please try again later.");
-  //   }
+    if (hasErrors) {
+      e.preventDefault(); // Prevent Formspree submission
+    }
   });
+
+  // Helper: Show field error
+  function setError(id, message) {
+    const input = document.getElementById(id);
+    const group = input.closest(".form-group");
+    group.classList.add("error");
+    const error = group.querySelector(".error-message");
+    error.textContent = message;
+  }
+
+  // Helper: Basic email validation
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email.toLowerCase());
+  }
+
+  // Helper: Show feedback banner
+  function showFeedback(message, type = "success") {
+    feedback.textContent = message;
+    feedback.style.display = "block";
+    feedback.className = `form-feedback ${type}`;
+  }
 });
