@@ -2,44 +2,70 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("contactForm");
   const feedback = document.getElementById("form-feedback");
 
-   // ✅ Check if we're coming from Formspree's thanks page
-  // This handles both the custom redirect and Formspree's default thanks page
-  const urlParams = new URLSearchParams(window.location.search);
-  const currentUrl = window.location.href;
-  
-  // Check for success indicators
-  const isFormSuccess = urlParams.get("form") === "success" || 
-                       urlParams.get("language") === "en" ||
-                       document.referrer.includes("formspree.io/thanks");
-
-  if (isFormSuccess) {
-    // Clear form fields if the form exists
-    if (form) {
-      form.reset();
-    }
-
-    // Show a thank you message
-    if (feedback) {
-      feedback.textContent = "Thanks for reaching out! Your message has been sent.";
-      feedback.style.display = "block";
-      feedback.className = "form-feedback success";
-    // Auto-hide the message after 5 seconds
-      setTimeout(() => {
-        feedback.style.display = "none";
-      }, 5000);
-    }
-
-    // ✅ Clean up URL to remove query parameters
-    const cleanUrl = window.location.protocol + "//" + 
-                    window.location.host + 
-                    window.location.pathname + 
-                    window.location.hash;
-    window.history.replaceState({}, document.title, cleanUrl);
+  // ✅ Multiple ways to detect successful form submission
+  function checkForFormSuccess() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentUrl = window.location.href;
+    const referrer = document.referrer;
+    
+    // Method 1: Check URL parameters (custom redirect)
+    const hasSuccessParam = urlParams.get("form") === "success";
+    
+    // Method 2: Check if coming from Formspree thanks page
+    const fromFormspree = referrer.includes("formspree.io/thanks") || 
+                         referrer.includes("formspree.io") ||
+                         urlParams.get("language") === "en";
+    
+    // Method 3: Check localStorage flag
+    const hasLocalStorageFlag = localStorage.getItem('formSubmitted') === 'true';
+    
+    // Method 4: Check sessionStorage (for same-tab navigation)
+    const hasSessionFlag = sessionStorage.getItem('formJustSubmitted') === 'true';
+    
+    return hasSuccessParam || fromFormspree || hasLocalStorageFlag || hasSessionFlag;
   }
 
-  // ✅ Store form data in localStorage before submission (as backup)
+  // ✅ Handle successful form submission
+  if (checkForFormSuccess()) {
+    console.log('Form success detected!'); // Debug log
+    
+    // Clear all flags
+    localStorage.removeItem('formSubmitted');
+    sessionStorage.removeItem('formJustSubmitted');
+    
+    // Clear form fields
+    if (form) {
+      form.reset();
+      console.log('Form cleared!'); // Debug log
+    }
+
+    // Show success message
+    if (feedback) {
+      feedback.textContent = "Thank you for reaching out! Your message has been sent successfully.";
+      feedback.style.display = "block";
+      feedback.className = "form-feedback success";
+      
+      // Auto-hide after 8 seconds (longer to ensure user sees it)
+      setTimeout(() => {
+        feedback.style.display = "none";
+      }, 8000);
+    }
+
+    // Clean up URL parameters
+    if (window.location.search) {
+      const cleanUrl = window.location.protocol + "//" + 
+                      window.location.host + 
+                      window.location.pathname + 
+                      window.location.hash;
+      window.history.replaceState({}, document.title, cleanUrl);
+    }
+  }
+
+  // ✅ Form submission handler
   if (form) {
     form.addEventListener("submit", function (e) {
+      console.log('Form submission started'); // Debug log
+      
       // Clear previous errors
       const formGroups = document.querySelectorAll(".form-group");
       formGroups.forEach((group) => {
@@ -78,12 +104,18 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       if (hasErrors) {
-        e.preventDefault(); // Prevent submission
+        e.preventDefault();
         return;
       }
 
-      // If validation passes, store a flag in localStorage
+      // ✅ Set multiple flags before form submission
+      console.log('Setting submission flags'); // Debug log
       localStorage.setItem('formSubmitted', 'true');
+      sessionStorage.setItem('formJustSubmitted', 'true');
+      
+      // Set a timestamp to avoid stale flags
+      const timestamp = new Date().getTime();
+      localStorage.setItem('formSubmissionTime', timestamp.toString());
       
       // Show loading state
       const submitBtn = form.querySelector('button[type="submit"]');
@@ -91,27 +123,76 @@ document.addEventListener("DOMContentLoaded", function () {
         submitBtn.textContent = 'Sending...';
         submitBtn.disabled = true;
       }
+
+      // ✅ Try to detect when user returns from Formspree
+      // This creates a backup detection method
+      setTimeout(() => {
+        window.addEventListener('focus', handleWindowFocus);
+        window.addEventListener('pageshow', handlePageShow);
+      }, 1000);
     });
   }
 
-  // ✅ Check localStorage for recent form submission
-  if (localStorage.getItem('formSubmitted') === 'true') {
-    // Clear the flag
-    localStorage.removeItem('formSubmitted');
-    
-    // Clear form and show success message
-    if (form) {
-      form.reset();
+  // ✅ Handle when user returns to the tab/page
+  function handleWindowFocus() {
+    console.log('Window focused, checking for form success'); // Debug log
+    checkAndHandleReturn();
+  }
+
+  function handlePageShow(event) {
+    console.log('Page shown, checking for form success'); // Debug log
+    if (event.persisted) {
+      // Page was loaded from cache (back button)
+      checkAndHandleReturn();
     }
+  }
+
+  function checkAndHandleReturn() {
+    const submissionTime = localStorage.getItem('formSubmissionTime');
+    const now = new Date().getTime();
     
-    if (feedback) {
-      feedback.textContent = "Thank you! Your message has been sent successfully.";
-      feedback.style.display = "block";
-      feedback.className = "form-feedback success";
-      
-      setTimeout(() => {
-        feedback.style.display = "none";
-      }, 5000);
+    // Only check if submission was recent (within last 5 minutes)
+    if (submissionTime && (now - parseInt(submissionTime)) < 300000) {
+      if (localStorage.getItem('formSubmitted') === 'true' || 
+          sessionStorage.getItem('formJustSubmitted') === 'true') {
+        
+        console.log('Detected return from form submission'); // Debug log
+        
+        // Clear flags
+        localStorage.removeItem('formSubmitted');
+        localStorage.removeItem('formSubmissionTime');
+        sessionStorage.removeItem('formJustSubmitted');
+        
+        // Clear form and show success
+        if (form) {
+          form.reset();
+        }
+        
+        if (feedback) {
+          feedback.textContent = "Thank you! Your message has been sent successfully.";
+          feedback.style.display = "block";
+          feedback.className = "form-feedback success";
+          
+          setTimeout(() => {
+            feedback.style.display = "none";
+          }, 8000);
+        }
+        
+        // Remove event listeners to prevent multiple triggers
+        window.removeEventListener('focus', handleWindowFocus);
+        window.removeEventListener('pageshow', handlePageShow);
+      }
+    }
+  }
+
+  // ✅ Clean up old localStorage entries on page load
+  const submissionTime = localStorage.getItem('formSubmissionTime');
+  if (submissionTime) {
+    const now = new Date().getTime();
+    // Remove flags older than 5 minutes
+    if ((now - parseInt(submissionTime)) > 300000) {
+      localStorage.removeItem('formSubmitted');
+      localStorage.removeItem('formSubmissionTime');
     }
   }
 
