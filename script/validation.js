@@ -6,7 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get("form") === "success") {
     // Clear form fields if the form exists
-    if (form) form.reset();
+    if (form) {
+      form.reset();
+    }
 
     // Show a thank you message
     if (feedback) {
