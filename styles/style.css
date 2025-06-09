@@ -1,3 +1,13 @@
+:root {
+  --primary-color: #3a86ff;
+  --bg-dark: #0d0d17;
+  --bg-card: rgba(16, 24, 40, 0.3);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  --border-color: rgba(255, 255, 255, 0.1);
+}
+
+
 html{
   scroll-behavior: smooth;
 }
@@ -9,6 +19,8 @@ body {
   font-family: 'Raleway', sans-serif;
   color: white;
   background: #121212;
+  background: var(--bg-dark);
+  color: var(--text-primary);
 
   }
 
