@@ -50,3 +50,7 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #3a86ff;
 }
+
+a{
+  color: #3a86ff;
+}
