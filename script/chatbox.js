@@ -148,11 +148,14 @@ Let me know what you’d like to explore — I’ve got all the info you need! �
             return "Lutho didn’t start out in tech, but the moment she found software development, it just clicked. It’s where her creativity and love for problem-solving come alive every day. She’s especially passionate about artificial intelligence—not just the tech itself, but how it can genuinely make life and work better. Lutho’s all about building systems that actually help people in meaningful ways. Along the way, she’s picked up skills in cloud computing, full-stack development, and AI. Always curious and driven, she’s dedicated to crafting thoughtful, reliable solutions and can’t wait to see what’s around the corner.";
         }
 
+        if (message.toLowerCase().includes("are you open to collaboration?") || message.toLowerCase().includes("collaborate") || message.toLowerCase().includes("build") || message.toLowerCase().includes("team up")){
+            return "Absolutely! I love working with others—whether it’s building something meaningful, tackling a tough problem, or learning new things together. If you have an idea or project in mind, I’d be happy to chat and see how we can make it happen. To contact me, feel free to  <a href=\"mailto:lutho.usa@gmail.com\">email</a> or connect with her on <a href=\"https://www.linkedin.com/in/lutho-mgolombane/\" target=\"_blank\" rel=\"noopener noreferrer\">LinkedIn</a> or use the contact form on this site!"
+        }
 
-        
-        // if (message.includes('ai') || message.includes('machine learning') || message.includes('ml')) {
-        //     return "Lutho is passionate about AI and machine learning! she has experience in Natural Language Processing, Computer Vision, and Reinforcement Learning, and she's always exploring new ways AI can solve real-world problems.";
-        // }
+        if (message.toLowerCase().includes("where can I see your resume?") || message.toLowerCase().includes("resume download") || message.toLowerCase().includes("cv") || message.toLowerCase().includes("resume")){
+            return 'Sure! You can download my resume here: <a href="assets/resume-lutho.pdf" download target="_blank">Download Résumé (PDF)</a>';
+        }
+    
         
         if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
             return "Hey there! I’m Lutho’s AI assistant. I can share info about her skills, projects, experience, or help you get in touch. What would you like to know?";

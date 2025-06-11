@@ -2,11 +2,28 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("contactForm");
   const feedback = document.getElementById("form-feedback");
 
+  function clearForm() {
+    if (form) {
+      form.reset();
+      console.log('Form cleared!');
+      
+      // Also clear any custom styling/classes
+      const formGroups = document.querySelectorAll(".form-group");
+      formGroups.forEach((group) => {
+        group.classList.remove("error");
+        const error = group.querySelector(".error-message");
+        if (error) error.remove();
+      });
+    }
+  }
+
+
   // ✅ Multiple ways to detect successful form submission
   function checkForFormSuccess() {
     const urlParams = new URLSearchParams(window.location.search);
     const currentUrl = window.location.href;
     const referrer = document.referrer;
+    
     
     // Method 1: Check URL parameters (custom redirect)
     const hasSuccessParam = urlParams.get("form") === "success";
@@ -32,24 +49,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // Clear all flags
     localStorage.removeItem('formSubmitted');
     sessionStorage.removeItem('formJustSubmitted');
+    localStorage.removeItem('formSubmissionTime');
     
-    // Clear form fields
-    if (form) {
-      form.reset();
-      console.log('Form cleared!'); // Debug log
-    }
+    // Clear form and show success
+    clearForm();
+    showSuccessMessage();
 
-    // Show success message
-    if (feedback) {
-      feedback.textContent = "Thank you for reaching out! Your message has been sent successfully.";
-      feedback.style.display = "block";
-      feedback.className = "form-feedback success";
-      
-      // Auto-hide after 8 seconds (longer to ensure user sees it)
-      setTimeout(() => {
-        feedback.style.display = "none";
-      }, 8000);
-    }
 
     // Clean up URL parameters
     if (window.location.search) {
@@ -108,8 +113,16 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      // ✅ Set multiple flags before form submission
-      console.log('Setting submission flags'); // Debug log
+      // ✅ IMMEDIATE CLEAR: Clear form right after successful validation
+      // This ensures the form clears even if detection methods fail
+      setTimeout(() => {
+        clearForm();
+        showSuccessMessage();
+      }, 100); // Small delay to ensure form submission starts
+  
+
+   // ✅ Set flags for backup detection methods
+      console.log('Setting submission flags');
       localStorage.setItem('formSubmitted', 'true');
       sessionStorage.setItem('formJustSubmitted', 'true');
       
@@ -117,15 +130,21 @@ document.addEventListener("DOMContentLoaded", function () {
       const timestamp = new Date().getTime();
       localStorage.setItem('formSubmissionTime', timestamp.toString());
       
-      // Show loading state
+      // Show loading state briefly
       const submitBtn = form.querySelector('button[type="submit"]');
       if (submitBtn) {
+        const originalText = submitBtn.textContent;
         submitBtn.textContent = 'Sending...';
         submitBtn.disabled = true;
+        
+        // Reset button after form clears
+        setTimeout(() => {
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+        }, 2000);
       }
 
-      // ✅ Try to detect when user returns from Formspree
-      // This creates a backup detection method
+      // ✅ Backup detection for when user returns from Formspree
       setTimeout(() => {
         window.addEventListener('focus', handleWindowFocus);
         window.addEventListener('pageshow', handlePageShow);
@@ -133,16 +152,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ✅ Handle when user returns to the tab/page
+  // ✅ Handle when user returns to the tab/page (backup method)
   function handleWindowFocus() {
-    console.log('Window focused, checking for form success'); // Debug log
+    console.log('Window focused, checking for form success');
     checkAndHandleReturn();
   }
 
   function handlePageShow(event) {
-    console.log('Page shown, checking for form success'); // Debug log
+    console.log('Page shown, checking for form success');
     if (event.persisted) {
-      // Page was loaded from cache (back button)
       checkAndHandleReturn();
     }
   }
@@ -156,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (localStorage.getItem('formSubmitted') === 'true' || 
           sessionStorage.getItem('formJustSubmitted') === 'true') {
         
-        console.log('Detected return from form submission'); // Debug log
+        console.log('Detected return from form submission');
         
         // Clear flags
         localStorage.removeItem('formSubmitted');
@@ -164,19 +182,8 @@ document.addEventListener("DOMContentLoaded", function () {
         sessionStorage.removeItem('formJustSubmitted');
         
         // Clear form and show success
-        if (form) {
-          form.reset();
-        }
-        
-        if (feedback) {
-          feedback.textContent = "Thank you! Your message has been sent successfully.";
-          feedback.style.display = "block";
-          feedback.className = "form-feedback success";
-          
-          setTimeout(() => {
-            feedback.style.display = "none";
-          }, 8000);
-        }
+        clearForm();
+        showSuccessMessage();
         
         // Remove event listeners to prevent multiple triggers
         window.removeEventListener('focus', handleWindowFocus);
@@ -193,8 +200,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if ((now - parseInt(submissionTime)) > 300000) {
       localStorage.removeItem('formSubmitted');
       localStorage.removeItem('formSubmissionTime');
+      sessionStorage.removeItem('formJustSubmitted');
     }
   }
+
+  
 
   function showError(id, message) {
     const input = document.getElementById(id);
