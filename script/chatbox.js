@@ -141,7 +141,7 @@ Let me know what you’d like to explore — I’ve got all the info you need! �
         }
         
         if (message.includes('contact') || message.includes('reach') || message.includes('email')) {
-            return "Hi there! If you want to get in touch with Lutho, just send her an <a href=\"mailto:lutho.usa@gmail.com\">email</a> or connect with her on <a href=\"https://www.linkedin.com/in/lutho-mgolombane/\" target=\"_blank\" rel=\"noopener noreferrer\">LinkedIn</a>.";
+            return "Hi there! If you want to get in touch with Lutho, just send her an <a href=\"mailto:lutho.mgolombane@capaciti.org.za\">email</a> or connect with her on <a href=\"https://www.linkedin.com/in/lutho-mgolombane/\" target=\"_blank\" rel=\"noopener noreferrer\">LinkedIn</a>.";
         }
 
        if (message.toLowerCase().includes("who's lutho") || message.toLowerCase().includes("who is lutho") || message.toLowerCase().includes("about")) {
@@ -149,11 +149,11 @@ Let me know what you’d like to explore — I’ve got all the info you need! �
         }
 
         if (message.toLowerCase().includes("are you open to collaboration?") || message.toLowerCase().includes("collaborate") || message.toLowerCase().includes("build") || message.toLowerCase().includes("team up")){
-            return "Absolutely! I love working with others—whether it’s building something meaningful, tackling a tough problem, or learning new things together. If you have an idea or project in mind, I’d be happy to chat and see how we can make it happen. To contact me, feel free to  <a href=\"mailto:lutho.usa@gmail.com\">email</a> or connect with her on <a href=\"https://www.linkedin.com/in/lutho-mgolombane/\" target=\"_blank\" rel=\"noopener noreferrer\">LinkedIn</a> or use the contact form on this site!"
+            return "Absolutely! I love working with others—whether it’s building something meaningful, tackling a tough problem, or learning new things together. If you have an idea or project in mind, I’d be happy to chat and see how we can make it happen. To contact me, feel free to  <a href=\"mailto:lutho.mgolombane@capaciti.org.za\">email</a> or connect with her on <a href=\"https://www.linkedin.com/in/lutho-mgolombane/\" target=\"_blank\" rel=\"noopener noreferrer\">LinkedIn</a> or use the contact form on this site!"
         }
 
         if (message.toLowerCase().includes("where can I see your resume?") || message.toLowerCase().includes("resume download") || message.toLowerCase().includes("cv") || message.toLowerCase().includes("resume")){
-            return 'Sure! You can download my resume here: <a href="assets/resume-lutho.pdf" download target="_blank">Download Résumé (PDF)</a>';
+            return 'Sure! You can download my resume here: <a href="assets/Lutho Mgolombane_AI_CV2025.pdf" download target="_blank">Download Lutho Resume (PDF)</a>';
         }
     
         
