@@ -3,8 +3,8 @@ class HuggingFaceChatbot {
     constructor() {
         // Using a more suitable model for conversation
         this.apiUrl = 'https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium';
-        const token = process.env.HUGGING_FACE_TOKEN || process.env.HF_TOKEN;
-        // this.apiKey = 'your_hugging_face_token_here'.env; // Add your token
+        // const token = process.env.HUGGING_FACE_TOKEN || process.env.HF_TOKEN;
+        this.apiKey = 'your_hugging_face_token_here'.env; // Add your token
         this.conversationHistory = [];
       }
       
