@@ -137,7 +137,7 @@ Let me know what you’d like to explore — I’ve got all the info you need! �
         }
         
         if (message.includes('project') || message.includes('work')) {
-            return "Great things are coming! Lutho’s projects will be available here shortly.";
+            return "Lutho’s projects include a Java-based virtual Robot World where robots interact in real-time, an AI-powered chatbot for CAPACITI that answers common questions around the clock, and MedAlert—a secure health platform that gives users instant access to their emergency medical info.";
         }
         
         if (message.includes('contact') || message.includes('reach') || message.includes('email')) {
